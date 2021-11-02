@@ -1,6 +1,6 @@
-package org.example.service;
+package org.example.SpringBootApp.service;
 
-import org.example.domain.Employee;
+import org.example.SpringBootApp.domain.Employee;
 
 import java.util.List;
 
