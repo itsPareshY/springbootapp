@@ -1,4 +1,4 @@
-package org.example.SpringBootApp.controller.rest.vo;
+package org.example.SpringBootApp.controller.vo;
 
 import lombok.*;
 

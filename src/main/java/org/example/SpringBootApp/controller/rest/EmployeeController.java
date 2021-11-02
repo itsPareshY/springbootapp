@@ -1,6 +1,6 @@
 package org.example.SpringBootApp.controller.rest;
 
-import org.example.SpringBootApp.controller.rest.vo.ErrorResponseBody;
+import org.example.SpringBootApp.controller.vo.ErrorResponseBody;
 import org.example.SpringBootApp.domain.Employee;
 import org.example.SpringBootApp.service.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.OptionalLong;
 
+import static org.example.SpringBootApp.controller.util.EmployeeConstants.*;
+
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
 
 
-    public static final long INVALID_EMP_ID = 0l;
-    private static final int INVALID_EMP_ID_ERROR = 100;
     private final IEmployeeService employeeService;
 
     @Autowired
@@ -36,11 +36,11 @@ public class EmployeeController {
     public ResponseEntity getEmployee(@PathVariable("empId") long id) {
         long optId = OptionalLong.of(id).orElse(INVALID_EMP_ID);
 
-        if (INVALID_EMP_ID != optId) {
+        if (INVALID_EMP_ID != optId || optId > 0) {
             return ResponseEntity.ok(employeeService.getEmployee(id));
         } else {
             return ResponseEntity.badRequest().body(new ErrorResponseBody(INVALID_EMP_ID_ERROR,
-                    "Invalid Employee Id"));
+                    INVALID_EMPLOYEE_ID_ERR_MSG));
         }
     }
 }
