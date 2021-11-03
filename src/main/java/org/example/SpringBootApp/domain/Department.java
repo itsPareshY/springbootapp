@@ -24,7 +24,7 @@ public class Department {
 
     private String name;
 
-    @OneToMany(mappedBy = "department")
+    @OneToMany(mappedBy = "department" , cascade = CascadeType.PERSIST)
     private List<Employee> employees;
 
 }

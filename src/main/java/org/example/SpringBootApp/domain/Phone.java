@@ -20,6 +20,6 @@ public class Phone {
     @Id
     private String number;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Employee employee;
 }

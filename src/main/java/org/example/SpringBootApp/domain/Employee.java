@@ -39,11 +39,11 @@ public class Employee implements Serializable {
 
     private String address;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Department department;
 
     private BigDecimal salary;
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee" ,cascade = CascadeType.PERSIST)
     private List<Phone> phones;
 }

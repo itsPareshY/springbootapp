@@ -1,5 +1,7 @@
 package org.example.SpringBootApp.controller.rest;
 
+import org.example.SpringBootApp.controller.validator.EmployeeValidator;
+import org.example.SpringBootApp.controller.vo.EmployeeVO;
 import org.example.SpringBootApp.controller.vo.ErrorResponseBody;
 import org.example.SpringBootApp.domain.Employee;
 import org.example.SpringBootApp.service.IEmployeeService;
@@ -34,6 +36,25 @@ public class EmployeeController {
 
     @GetMapping("/{empId}")
     public ResponseEntity getEmployee(@PathVariable("empId") long id) {
+        long optId = OptionalLong.of(id).orElse(INVALID_EMP_ID);
+
+        if (INVALID_EMP_ID != optId || optId > 0) {
+            return ResponseEntity.ok(employeeService.getEmployee(id));
+        } else {
+            return ResponseEntity.badRequest().body(new ErrorResponseBody(INVALID_EMP_ID_ERROR,
+                    INVALID_EMPLOYEE_ID_ERR_MSG));
+        }
+    }
+
+    @PostMapping
+    public ResponseEntity addEmployee(@RequestBody EmployeeVO employee) {
+        if(EmployeeValidator.valid(employee)){
+
+        }
+        else {
+            return ResponseEntity.badRequest().body(new ErrorResponseBody(INVALID_EMP_PAYLOAD_ERROR,
+                    INVALID_EMPLOYEE_PAYLOAD));
+        }
         long optId = OptionalLong.of(id).orElse(INVALID_EMP_ID);
 
         if (INVALID_EMP_ID != optId || optId > 0) {
