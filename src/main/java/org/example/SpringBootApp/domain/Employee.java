@@ -25,10 +25,8 @@ public class Employee implements Serializable {
     @Column(name = "id")
     private long id;
 
-    @Id
     private String fname;
 
-    @Id
     private String lname;
 
     @Column(name = "date_of_birth")
