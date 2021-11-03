@@ -4,6 +4,7 @@ import org.example.SpringBootApp.controller.validator.EmployeeValidator;
 import org.example.SpringBootApp.controller.vo.EmployeeVO;
 import org.example.SpringBootApp.controller.vo.ErrorResponseBody;
 import org.example.SpringBootApp.domain.Employee;
+import org.example.SpringBootApp.mappers.EmpVoToEmployeeMapper;
 import org.example.SpringBootApp.service.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -47,21 +48,14 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity addEmployee(@RequestBody EmployeeVO employee) {
-        if(EmployeeValidator.valid(employee)){
-
+    public ResponseEntity addEmployee(@RequestBody EmployeeVO employeeVO) {
+        if(EmployeeValidator.valid(employeeVO)){
+            Employee emp = EmpVoToEmployeeMapper.map(employeeVO);
+            return ResponseEntity.ok(employeeService.addEmployee(emp));
         }
         else {
             return ResponseEntity.badRequest().body(new ErrorResponseBody(INVALID_EMP_PAYLOAD_ERROR,
                     INVALID_EMPLOYEE_PAYLOAD));
-        }
-        long optId = OptionalLong.of(id).orElse(INVALID_EMP_ID);
-
-        if (INVALID_EMP_ID != optId || optId > 0) {
-            return ResponseEntity.ok(employeeService.getEmployee(id));
-        } else {
-            return ResponseEntity.badRequest().body(new ErrorResponseBody(INVALID_EMP_ID_ERROR,
-                    INVALID_EMPLOYEE_ID_ERR_MSG));
         }
     }
 }
