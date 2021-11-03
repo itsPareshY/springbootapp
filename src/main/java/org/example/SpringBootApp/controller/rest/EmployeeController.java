@@ -16,7 +16,7 @@ import java.util.OptionalLong;
 import static org.example.SpringBootApp.controller.util.EmployeeConstants.*;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/v1/employee")
 public class EmployeeController {
 
 
