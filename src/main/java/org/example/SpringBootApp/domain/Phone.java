@@ -13,13 +13,14 @@ import javax.persistence.*;
 @Entity
 public class Phone {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", unique = true, nullable = false)
     private long id;
 
-    @Id
     private String number;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private Employee employee;
+//    @ManyToOne(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+//    @JoinColumn(name = "employeeId")
+//    private Employee employee;
 }

@@ -4,6 +4,10 @@ import org.example.SpringBootApp.domain.Employee;
 import org.example.SpringBootApp.repository.EmployeeRepository;
 import org.example.SpringBootApp.service.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +25,11 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     @Override
     public List<Employee> getEmployees() {
-        return null;
+//        Page<Employee> resultPage = employeeRepository.findAll(
+//                PageRequest.of(1,10, Sort.by(Sort.Direction.DESC, "fname")));
+        List<Employee> result = employeeRepository.findAll(Sort.by(Sort.Direction.ASC, "fname"));
+//        List<Employee> result = resultPage.stream().toList();
+        return result;
     }
 
     @Override

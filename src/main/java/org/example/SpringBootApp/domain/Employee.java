@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -37,11 +38,12 @@ public class Employee implements Serializable {
 
     private String address;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private Department department;
 
     private BigDecimal salary;
 
-    @OneToMany(mappedBy = "employee" ,cascade = CascadeType.PERSIST)
-    private List<Phone> phones;
+    @OneToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+    @JoinColumn(name = "employeeId")
+    private Set<Phone> phones;
 }

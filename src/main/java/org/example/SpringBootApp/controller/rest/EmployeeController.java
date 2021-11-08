@@ -32,7 +32,8 @@ public class EmployeeController {
                                                          @RequestParam(value = "limit", required = false , defaultValue = "10") int limit ,
                                                          @RequestParam(value = "page" , required = false , defaultValue = "0") int page ,
                                                          @RequestParam(value = "offset", required = false , defaultValue = "0") int offset) {
-        return ResponseEntity.ok(employeeService.getEmployees());
+        List<Employee> employees = employeeService.getEmployees();
+        return ResponseEntity.ok(employees);
     }
 
     @GetMapping("/{empId}")

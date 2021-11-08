@@ -1,9 +1,12 @@
 package org.example.SpringBootApp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -13,6 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@JsonIgnoreProperties ( ignoreUnknown = true )
 public class Department {
 
     private static final long serialVersionUID = 102L;
@@ -24,7 +28,7 @@ public class Department {
 
     private String name;
 
-    @OneToMany(mappedBy = "department" , cascade = CascadeType.PERSIST)
-    private List<Employee> employees;
+    @OneToMany(mappedBy = "department" , cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Set<Employee> employees;
 
 }
