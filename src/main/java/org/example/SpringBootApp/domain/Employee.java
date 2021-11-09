@@ -1,6 +1,7 @@
 package org.example.SpringBootApp.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -38,6 +39,7 @@ public class Employee implements Serializable {
 
     private String address;
 
+    @JsonIgnoreProperties("employees")
     @ManyToOne(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private Department department;
 

@@ -28,6 +28,7 @@ public class Department {
 
     private String name;
 
+    @JsonIgnoreProperties("department")
     @OneToMany(mappedBy = "department" , cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<Employee> employees;
 
