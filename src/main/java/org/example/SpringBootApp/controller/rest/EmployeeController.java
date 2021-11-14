@@ -59,4 +59,11 @@ public class EmployeeController {
                     INVALID_EMPLOYEE_PAYLOAD));
         }
     }
+
+    @GetMapping("/phones")
+    public ResponseEntity getEmployeePhones() {
+
+            return ResponseEntity.ok(employeeService.getAllEmployeePhones());
+
+    }
 }

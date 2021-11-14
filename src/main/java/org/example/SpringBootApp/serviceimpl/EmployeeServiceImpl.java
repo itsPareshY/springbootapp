@@ -1,5 +1,6 @@
 package org.example.SpringBootApp.serviceimpl;
 
+import org.example.SpringBootApp.controller.dto.EmployeePhoneJoinResponse;
 import org.example.SpringBootApp.domain.Employee;
 import org.example.SpringBootApp.repository.EmployeeRepository;
 import org.example.SpringBootApp.service.IEmployeeService;
@@ -47,4 +48,11 @@ public class EmployeeServiceImpl implements IEmployeeService {
     public boolean deleteEmployee(long id) {
         return false;
     }
+
+    @Override
+    public List<EmployeePhoneJoinResponse> getAllEmployeePhones() {
+        return  employeeRepository.getEmployeePhoneJoin();
+    }
+
+
 }
