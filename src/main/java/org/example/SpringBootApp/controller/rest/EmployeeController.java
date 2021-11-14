@@ -1,8 +1,8 @@
 package org.example.SpringBootApp.controller.rest;
 
 import org.example.SpringBootApp.controller.validator.EmployeeValidator;
-import org.example.SpringBootApp.controller.vo.EmployeeVO;
-import org.example.SpringBootApp.controller.vo.ErrorResponseBody;
+import org.example.SpringBootApp.controller.dto.EmployeeVO;
+import org.example.SpringBootApp.controller.dto.ErrorResponseBody;
 import org.example.SpringBootApp.domain.Employee;
 import org.example.SpringBootApp.mappers.EmpVoToEmployeeMapper;
 import org.example.SpringBootApp.service.IEmployeeService;

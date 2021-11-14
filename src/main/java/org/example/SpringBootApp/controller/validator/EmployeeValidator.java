@@ -1,6 +1,6 @@
 package org.example.SpringBootApp.controller.validator;
 
-import org.example.SpringBootApp.controller.vo.EmployeeVO;
+import org.example.SpringBootApp.controller.dto.EmployeeVO;
 
 import java.util.Optional;
 
