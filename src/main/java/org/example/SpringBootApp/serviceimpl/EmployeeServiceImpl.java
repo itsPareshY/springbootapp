@@ -7,11 +7,11 @@ import org.example.SpringBootApp.service.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeServiceImpl implements IEmployeeService {
@@ -25,11 +25,25 @@ public class EmployeeServiceImpl implements IEmployeeService {
     }
 
     @Override
-    public List<Employee> getEmployees() {
-//        Page<Employee> resultPage = employeeRepository.findAll(
-//                PageRequest.of(1,10, Sort.by(Sort.Direction.DESC, "fname")));
-        List<Employee> result = employeeRepository.findAll(Sort.by(Sort.Direction.ASC, "fname"));
-//        List<Employee> result = resultPage.stream().toList();
+    public List<Employee> getEmployees(String deptName, int limit, int page) {
+        Page<Employee> resultPage = null;
+        if(Optional.ofNullable(deptName).isPresent()){
+            resultPage = employeeRepository.findEmployees(deptName,
+                    PageRequest.of(page,limit, Sort.by(Sort.Direction.ASC, "fname")));
+
+        }
+        else {
+            resultPage = employeeRepository.findAll(
+                    PageRequest.of(page,limit, Sort.by(Sort.Direction.ASC, "fname")));
+        }
+
+        List<Employee> result = resultPage.stream().toList();
+
+        // *******************Use below in response object
+        long totalRecords = resultPage.getTotalElements();
+        int totalPages = resultPage.getTotalPages();
+        //**************************************************
+        
         return result;
     }
 

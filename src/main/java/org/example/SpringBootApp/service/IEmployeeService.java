@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IEmployeeService {
 
-    List<Employee> getEmployees();
+    List<Employee> getEmployees(String deptName, int limit, int page);
 
     Employee getEmployee(long id);
 
