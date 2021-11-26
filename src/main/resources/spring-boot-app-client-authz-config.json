@@ -1,0 +1,136 @@
+{
+  "allowRemoteResourceManagement": true,
+  "policyEnforcementMode": "ENFORCING",
+  "resources": [
+    {
+      "name": "Default Resource",
+      "type": "urn:swagger-client:resources:default",
+      "ownerManagedAccess": false,
+      "attributes": {},
+      "_id": "23065837-3151-436d-9e42-4a011c57dff7",
+      "uris": [
+        "/*"
+      ]
+    },
+    {
+      "name": "GET /v1/employee",
+      "type": "org:employee",
+      "ownerManagedAccess": false,
+      "displayName": "Employee Resource",
+      "attributes": {},
+      "_id": "a8dd9fd9-8c4f-4efa-a07c-5c3a96a43802",
+      "uris": [
+        "/v1/employee"
+      ],
+      "scopes": [
+        {
+          "name": "GET"
+        }
+      ]
+    },
+    {
+      "name": "POST /v1/employee",
+      "type": "org:employee",
+      "ownerManagedAccess": false,
+      "displayName": "Employee Resource Post",
+      "attributes": {},
+      "_id": "612c0440-ea3d-4421-a3dd-68d8cd93538f",
+      "uris": [
+        "/v1/employee"
+      ],
+      "scopes": [
+        {
+          "name": "POST"
+        }
+      ],
+      "icon_uri": ""
+    },
+    {
+      "name": "GET /v1/employee/{empId}",
+      "ownerManagedAccess": false,
+      "displayName": "Get Emplyee by Id",
+      "attributes": {},
+      "_id": "93e92962-12f7-4d1d-830e-53fa726bc00d",
+      "uris": [
+        "/v1/employee/{empId}"
+      ],
+      "scopes": [
+        {
+          "name": "GET"
+        }
+      ]
+    },
+    {
+      "name": "GET /v1/employee/phones",
+      "ownerManagedAccess": false,
+      "displayName": "GET All Emplyee phones",
+      "attributes": {},
+      "_id": "e06dec45-65a8-4a58-b76a-75e252236b99",
+      "uris": [
+        "/v1/employee/phones"
+      ],
+      "scopes": [
+        {
+          "name": "GET"
+        }
+      ]
+    }
+  ],
+  "policies": [
+    {
+      "id": "199cba13-e966-4cd5-81f5-3e066bca870b",
+      "name": "spring-boot-app-admin",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "roles": "[{\"id\":\"default-roles-testrealm\",\"required\":false},{\"id\":\"spring-boot-app-client/spring-boot-app-admin-role\",\"required\":true}]"
+      }
+    },
+    {
+      "id": "a76e5c7c-fc84-428f-8c89-f59857d5d7df",
+      "name": "spring-boot-app-account-role-policy",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "roles": "[{\"id\":\"default-roles-testrealm\",\"required\":false},{\"id\":\"spring-boot-app-client/spring-boot-app-account-role\",\"required\":true}]"
+      }
+    },
+    {
+      "id": "4354aaab-2b72-4339-ac7b-b236383fe022",
+      "name": "POST /v1/employee",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"POST /v1/employee\"]",
+        "applyPolicies": "[\"spring-boot-app-admin\"]"
+      }
+    },
+    {
+      "id": "39333c9f-996d-4b93-a4bd-7997199c783d",
+      "name": "Permission for get APIs",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "scopes": "[\"GET\"]",
+        "applyPolicies": "[\"spring-boot-app-account-role-policy\",\"spring-boot-app-admin\"]"
+      }
+    }
+  ],
+  "scopes": [
+    {
+      "id": "67a7de68-fe1e-412e-909e-c7a851ae25f1",
+      "name": "GET",
+      "displayName": "GET"
+    },
+    {
+      "id": "54a42593-98a2-47ca-9787-21d19cecec42",
+      "name": "POST",
+      "displayName": "POST"
+    }
+  ],
+  "decisionStrategy": "UNANIMOUS"
+}

@@ -1,0 +1,1 @@
+spring-boot-app-client-authz-config.json should be imported in keycloak
