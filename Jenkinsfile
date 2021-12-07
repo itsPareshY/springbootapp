@@ -27,27 +27,27 @@ pipeline {
           echo 'Integration Tests'
             }
     }
-     stage('Artifacts') {
+     stage('Deploy Artifacts to repo/nexus') {
              steps {
                echo 'Integration Tests'
                  }
          }
-     stage('Deploy on AT env') {
+     stage('Dockerize and upload to nexus') {
              steps {
                echo 'Integration Tests'
                  }
          }
-     stage('Automation Test') {
+     stage('Deploy on AT env and run Automation Test') {
              steps {
                echo 'Integration Tests'
                  }
          }
-     stage('Upload Artifacts') {
+     stage('Reverts Artifacts if AT failed') {
              steps {
                echo 'Integration Tests'
                  }
          }
-     stage('Deploy') {
+     stage('Deploy on Staging if AT passed') {
              steps {
                echo 'Integration Tests'
                  }
