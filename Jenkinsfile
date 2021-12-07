@@ -13,7 +13,8 @@ pipeline {
     }
     stage('Build') {
     steps {
-        sh 'mvn clean install'
+        //sh 'mvn clean install'
+        echo 'Build'
         }
     }
     stage('Junit') {
