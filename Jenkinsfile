@@ -19,7 +19,7 @@ pipeline {
     }
     stage('Junit') {
         steps {
-            echo 'Junit'
+            echo 'sh mvn -T 1 org.jacoco:jacoco-maven-plugin:prepare-agent verify -Dmaven.test.failure.ignore=true'
             }
         }
     stage('Integration Test') {
@@ -27,14 +27,14 @@ pipeline {
           echo 'Integration Tests'
             }
     }
-     stage('Deploy Artifacts to repo/nexus') {
+     stage('Deploy Artifacts to repo/nexus append CL # to artifact') {
              steps {
-               echo 'Integration Tests'
+               echo 'mvn deploy -B -Dprepare-docker -Dinvoker.skip=true -Dmaven.test.skip=true -Dmaven.main.skip=true'
                  }
          }
      stage('Dockerize and upload to nexus') {
              steps {
-               echo 'Integration Tests'
+               echo 'use docker file'
                  }
          }
      stage('Deploy on AT env and run Automation Test') {
