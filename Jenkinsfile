@@ -24,7 +24,7 @@ pipeline {
         }
     stage('Integration Test') {
         steps {
-          echo 'Integration Tests'
+          echo 'Integration Tests mvn verifier'
             }
     }
      stage('Deploy Artifacts to repo/nexus append CL # to artifact') {
