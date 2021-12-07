@@ -26,5 +26,32 @@ pipeline {
         steps {
           echo 'Integration Tests'
             }
-    }  }
+    }
+     stage('Artifacts') {
+             steps {
+               echo 'Integration Tests'
+                 }
+         }
+     stage('Deploy on AT env') {
+             steps {
+               echo 'Integration Tests'
+                 }
+         }
+     stage('Automation Test') {
+             steps {
+               echo 'Integration Tests'
+                 }
+         }
+     stage('Upload Artifacts') {
+             steps {
+               echo 'Integration Tests'
+                 }
+         }
+     stage('Deploy') {
+             steps {
+               echo 'Integration Tests'
+                 }
+         }
+
+  }
 }
