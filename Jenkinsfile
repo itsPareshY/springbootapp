@@ -20,13 +20,20 @@ pipeline {
     stage('Junit') {
         steps {
             echo 'sh mvn -T 1 org.jacoco:jacoco-maven-plugin:prepare-agent verify -Dmaven.test.failure.ignore=true'
+            echo 'publish test result'
+            echo 'publish coverage'
             }
         }
     stage('Integration Test') {
         steps {
-          echo 'Integration Tests mvn verifier'
+          echo 'Use failsafe maven plugin - Integration Tests mvn verifier'
             }
     }
+    stage('Static code analysis ') {
+            steps {
+              echo 'PMD findbugs sonar'
+                }
+        }
      stage('Deploy Artifacts to repo/nexus append CL # to artifact') {
              steps {
                echo 'mvn deploy -B -Dprepare-docker -Dinvoker.skip=true -Dmaven.test.skip=true -Dmaven.main.skip=true'
