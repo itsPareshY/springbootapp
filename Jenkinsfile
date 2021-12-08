@@ -14,19 +14,20 @@ pipeline {
     stage('Build') {
     steps {
         //sh 'mvn clean install'
-        echo 'Build'
+        echo 'Build mvn clean install -DskipTests'
         }
     }
     stage('Junit') {
         steps {
-            echo 'sh mvn -T 1 org.jacoco:jacoco-maven-plugin:prepare-agent verify -Dmaven.test.failure.ignore=true'
+            echo 'mvn test - this will run only junits'
+            echo 'sh mvn -T 1 org.jacoco:jacoco-maven-plugin:prepare-agent test -Dmaven.test.failure.ignore=true'
             echo 'publish test result'
             echo 'publish coverage'
             }
         }
     stage('Integration Test') {
         steps {
-          echo 'Use failsafe maven plugin - Integration Tests mvn verifier'
+        echo ' mvn failsafe:integration-test@it-tests - this will run integration tests *IT.java'
             }
     }
     stage('Static code analysis ') {
