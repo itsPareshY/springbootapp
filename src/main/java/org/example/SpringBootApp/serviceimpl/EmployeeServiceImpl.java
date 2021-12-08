@@ -6,10 +6,12 @@ import org.example.SpringBootApp.repository.EmployeeRepository;
 import org.example.SpringBootApp.service.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +39,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
                     PageRequest.of(page,limit, Sort.by(Sort.Direction.ASC, "fname")));
         }
 
+        resultPage = Optional.ofNullable(resultPage).orElse(new PageImpl<Employee>(new ArrayList<Employee>()));
         List<Employee> result = resultPage.stream().toList();
 
         // *******************Use below in response object
