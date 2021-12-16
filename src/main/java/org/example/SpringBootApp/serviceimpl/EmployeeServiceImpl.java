@@ -18,7 +18,6 @@ import java.util.Optional;
 @Service
 public class EmployeeServiceImpl implements IEmployeeService {
 
-
     private EmployeeRepository employeeRepository;
 
     @Autowired
@@ -32,27 +31,23 @@ public class EmployeeServiceImpl implements IEmployeeService {
         if(Optional.ofNullable(deptName).isPresent()){
             resultPage = employeeRepository.findEmployees(deptName,
                     PageRequest.of(page,limit, Sort.by(Sort.Direction.ASC, "fname")));
-
         }
         else {
             resultPage = employeeRepository.findAll(
                     PageRequest.of(page,limit, Sort.by(Sort.Direction.ASC, "fname")));
         }
-
         resultPage = Optional.ofNullable(resultPage).orElse(new PageImpl<Employee>(new ArrayList<Employee>()));
         List<Employee> result = resultPage.stream().toList();
-
         // *******************Use below in response object
         long totalRecords = resultPage.getTotalElements();
         int totalPages = resultPage.getTotalPages();
         //**************************************************
-        
         return result;
     }
 
     @Override
-    public Employee getEmployee(long id) {
-        return null;
+    public Optional<Employee> getEmployee(long id)  {
+        return employeeRepository.findById(id);
     }
 
     @Override

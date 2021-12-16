@@ -1,8 +1,8 @@
 package org.example.SpringBootApp.controller.rest;
 
-import org.example.SpringBootApp.controller.validator.EmployeeValidator;
 import org.example.SpringBootApp.controller.dto.EmployeeVO;
 import org.example.SpringBootApp.controller.dto.ErrorResponseBody;
+import org.example.SpringBootApp.controller.validator.EmployeeValidator;
 import org.example.SpringBootApp.domain.Employee;
 import org.example.SpringBootApp.mappers.EmpVoToEmployeeMapper;
 import org.example.SpringBootApp.service.IEmployeeService;
@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.NotFoundException;
 import java.util.List;
+import java.util.Optional;
 import java.util.OptionalLong;
 
 import static org.example.SpringBootApp.controller.util.EmployeeConstants.*;
@@ -40,7 +42,8 @@ public class EmployeeController {
         long optId = OptionalLong.of(id).orElse(INVALID_EMP_ID);
 
         if (INVALID_EMP_ID != optId || optId > 0) {
-            return ResponseEntity.ok(employeeService.getEmployee(id));
+            Optional<Employee> result = employeeService.getEmployee(id);
+            return result.isPresent() ? ResponseEntity.ok(result) : ResponseEntity.notFound().build();
         } else {
             return ResponseEntity.badRequest().body(new ErrorResponseBody(INVALID_EMP_ID_ERROR,
                     INVALID_EMPLOYEE_ID_ERR_MSG));
