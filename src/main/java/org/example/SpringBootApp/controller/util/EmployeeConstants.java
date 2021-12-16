@@ -12,4 +12,5 @@ public interface EmployeeConstants {
     String INVALID_EMPLOYEE_ID = "Invalid employee id : ";
     int VALIDATION_FAILED_ERR_CODE = 102;
     int UNHANDLED_ERROR_CODE = 0;
+    String REQUIRED_TYPE_IS = "Required Type is : ";
 }
