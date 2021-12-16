@@ -2,17 +2,17 @@ package org.example.SpringBootApp.controller.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @EqualsAndHashCode
 @ToString
+@AllArgsConstructor
 public class ErrorResponseBody {
 
     private int errorCode;
     private String errorMessage;
+    List<String> details;
 
-    public ErrorResponseBody(int errorCode, String errorMessage) {
-        this.errorCode = errorCode;
-        this.errorMessage = errorMessage;
-    }
 }

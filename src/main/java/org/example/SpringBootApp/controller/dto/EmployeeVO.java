@@ -10,6 +10,7 @@ import lombok.ToString;
 import org.example.SpringBootApp.domain.Department;
 import org.example.SpringBootApp.domain.Phone;
 
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -25,19 +26,27 @@ public class EmployeeVO implements Serializable {
 
     private static final long serialVersionUID = 102L;
 
+    @NotBlank (message = "fname cannot be blank")
     private String fname;
 
+    @NotEmpty(message = "lname should not be empty")
     private String lname;
 
+    @Past(message = "DoB should be past date")
     private LocalDate dob;
 
+    @PastOrPresent
     private LocalDate doj;
 
     private String address;
 
+    @NotNull (message = "Department is required")
     private Department department;
 
+    @DecimalMin(value = "0.0", inclusive = false)
+    @Digits(integer=3, fraction=2)
     private BigDecimal salary;
 
+    @NotEmpty (message = "Phone list must not be empty")
     private List<Phone> phones;
 }
