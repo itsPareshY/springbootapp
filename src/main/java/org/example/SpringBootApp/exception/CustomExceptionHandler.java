@@ -8,6 +8,7 @@ import static org.example.SpringBootApp.controller.util.EmployeeConstants.*;
 
 import org.example.SpringBootApp.controller.util.EmployeeConstants;
 import org.springframework.beans.TypeMismatchException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,13 +32,21 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler
 //        return new ResponseEntity(error, HttpStatus.INTERNAL_SERVER_ERROR);
 //    }
 
-//    @ExceptionHandler(RecordNotFoundException.class)
-//    public final ResponseEntity<Object> handleRecordNotFoundException( RecordNotFoundException ex, WebRequest request) {
-//        List<String> details = new ArrayList<>();
-//        details.add(ex.getLocalizedMessage());
-//        ErrorResponseBody error = new ErrorResponseBody( ex.getErrorCode() , ex.getErrorMessage() ,  details);
-//        return new ResponseEntity(error, HttpStatus.NOT_FOUND);
-//    }
+    @ExceptionHandler(EmptyResultDataAccessException.class)
+        public final ResponseEntity<Object> handleRecordNotFoundException( EmptyResultDataAccessException ex, WebRequest request) {
+            List<String> details = new ArrayList<>();
+            details.add(ex.getLocalizedMessage());
+            ErrorResponseBody error = new ErrorResponseBody( INVALID_EMP_ID_ERROR , RECORD_NOT_FOUND ,  details);
+            return new ResponseEntity(error, HttpStatus.NOT_FOUND);
+        }
+
+    @ExceptionHandler(RecordNotFoundException.class)
+    public final ResponseEntity<Object> handleRecordNotFoundException( RecordNotFoundException ex, WebRequest request) {
+        List<String> details = new ArrayList<>();
+        details.add(ex.getLocalizedMessage());
+        ErrorResponseBody error = new ErrorResponseBody( ex.getErrorCode() , ex.getErrorMessage() ,  details);
+        return new ResponseEntity(error, HttpStatus.NOT_FOUND);
+    }
 
     @ExceptionHandler(CustomForbiddenException.class)
     public final ResponseEntity<Object> handleForbiddenException(CustomForbiddenException ex, WebRequest request) {

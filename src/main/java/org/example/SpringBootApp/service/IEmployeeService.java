@@ -14,7 +14,7 @@ public interface IEmployeeService {
 
     Employee addEmployee (Employee employee);
 
-    boolean deleteEmployee (long id);
+    void deleteEmployee (long id);
 
     List<EmployeePhoneJoinResponse> getAllEmployeePhones();
 

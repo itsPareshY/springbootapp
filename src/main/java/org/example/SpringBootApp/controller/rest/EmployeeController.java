@@ -59,8 +59,12 @@ public class EmployeeController {
 
     @GetMapping("/phones")
     public ResponseEntity getEmployeePhones() {
-
             return ResponseEntity.ok(employeeService.getAllEmployeePhones());
+    }
 
+    @DeleteMapping("/{empId}")
+    public ResponseEntity deleteEmpById(@PathVariable("empId") long id){
+        employeeService.deleteEmployee(id);
+        return ResponseEntity.ok().build();
     }
 }
