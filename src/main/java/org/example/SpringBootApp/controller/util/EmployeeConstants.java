@@ -13,4 +13,11 @@ public interface EmployeeConstants {
     int VALIDATION_FAILED_ERR_CODE = 102;
     int UNHANDLED_ERROR_CODE = 0;
     String REQUIRED_TYPE_IS = "Required Type is : ";
+    String EMP_ID = "empId";
+    String DEPARTMENT_NAME = "departmentName";
+    String LIMIT = "limit";
+    String PAGE = "page";
+    String DEFAULT_PAGE = "0";
+    String DEFAULT_LIMIT = "10";
+    String EMP_FIRST_NAME = "fname";
 }

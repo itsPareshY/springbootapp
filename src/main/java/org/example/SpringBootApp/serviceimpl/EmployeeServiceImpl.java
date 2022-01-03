@@ -1,6 +1,7 @@
 package org.example.SpringBootApp.serviceimpl;
 
 import org.example.SpringBootApp.controller.dto.EmployeePhoneJoinResponse;
+import org.example.SpringBootApp.controller.util.EmployeeConstants;
 import org.example.SpringBootApp.domain.Employee;
 import org.example.SpringBootApp.repository.EmployeeRepository;
 import org.example.SpringBootApp.service.IEmployeeService;
@@ -30,11 +31,11 @@ public class EmployeeServiceImpl implements IEmployeeService {
         Page<Employee> resultPage = null;
         if(Optional.ofNullable(deptName).isPresent()){
             resultPage = employeeRepository.findEmployees(deptName,
-                    PageRequest.of(page,limit, Sort.by(Sort.Direction.ASC, "fname")));
+                    PageRequest.of(page,limit, Sort.by(Sort.Direction.ASC, EmployeeConstants.EMP_FIRST_NAME)));
         }
         else {
             resultPage = employeeRepository.findAll(
-                    PageRequest.of(page,limit, Sort.by(Sort.Direction.ASC, "fname")));
+                    PageRequest.of(page,limit, Sort.by(Sort.Direction.ASC, EmployeeConstants.EMP_FIRST_NAME)));
         }
         resultPage = Optional.ofNullable(resultPage).orElse(new PageImpl<Employee>(new ArrayList<Employee>()));
         List<Employee> result = resultPage.stream().toList();

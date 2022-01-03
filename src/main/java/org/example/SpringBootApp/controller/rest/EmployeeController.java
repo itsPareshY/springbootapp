@@ -23,7 +23,6 @@ import static org.example.SpringBootApp.controller.util.EmployeeConstants.*;
 @RequestMapping("/v1/employee")
 public class EmployeeController {
 
-
     private final IEmployeeService employeeService;
 
     @Autowired
@@ -32,15 +31,15 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Employee>> getAllEmployees(@RequestParam(value = "departmentName", required = false) String deptName ,
-                                                         @RequestParam(value = "limit", required = false , defaultValue = "10") int limit ,
-                                                         @RequestParam(value = "page" , required = false , defaultValue = "0") int page ) {
+    public ResponseEntity<List<Employee>> getAllEmployees(@RequestParam(value = DEPARTMENT_NAME, required = false) String deptName ,
+                                                         @RequestParam(value = LIMIT, required = false , defaultValue = DEFAULT_LIMIT) int limit ,
+                                                         @RequestParam(value = PAGE, required = false , defaultValue = DEFAULT_PAGE) int page ) {
         List<Employee> employees = employeeService.getEmployees(deptName , limit , page );
         return ResponseEntity.ok(employees);
     }
 
     @GetMapping("/{empId}")
-    public ResponseEntity getEmployee(@PathVariable("empId") long id) throws RecordNotFoundException, InputParamInvalidException {
+    public ResponseEntity getEmployee(@PathVariable(EMP_ID) long id) throws RecordNotFoundException, InputParamInvalidException {
         long optId = OptionalLong.of(id).orElse(INVALID_EMP_ID);
 
         if (INVALID_EMP_ID != optId && optId > 0) {
@@ -63,7 +62,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{empId}")
-    public ResponseEntity deleteEmpById(@PathVariable("empId") long id){
+    public ResponseEntity deleteEmpById(@PathVariable(EMP_ID) long id){
         employeeService.deleteEmployee(id);
         return ResponseEntity.ok().build();
     }
