@@ -40,7 +40,7 @@ public class Employee implements Serializable {
     private String address;
 
     @JsonIgnoreProperties("employees")
-    @ManyToOne(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)
     private Department department;
 
     private BigDecimal salary;
