@@ -2,22 +2,24 @@ package org.example.SpringBootApp.serviceimpl;
 
 import org.example.SpringBootApp.domain.Employee;
 import org.example.SpringBootApp.repository.EmployeeRepository;
-import org.example.SpringBootApp.serviceimpl.EmployeeServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.data.domain.*;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.example.SpringBootApp.EmployeeTestConstants.DEPT_NAME_OPS;
+import static org.example.SpringBootApp.EmployeeTestConstants.FNAME;
 import static org.mockito.BDDMockito.given;
 
 public class EmployeeServiceImplTest {
 
-    public static final String DEPT_NAME_OPS = "ops";
     private EmployeeServiceImpl employeeService;
 
     @Mock
@@ -31,7 +33,7 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void testGetEmployeesWithoutDeptFilterAndNoRecordsInDB(){
-        PageRequest pageRequest = PageRequest.of(0,3, Sort.by(Sort.Direction.ASC, "fname"));
+        PageRequest pageRequest = PageRequest.of(0,3, Sort.by(Sort.Direction.ASC, FNAME));
         given(employeeRepository.findAll(pageRequest))
                 .willReturn(null);
 
@@ -42,7 +44,7 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void testGetEmployeesWithoutDeptFilter(){
-        PageRequest pageRequest = PageRequest.of(0,3, Sort.by(Sort.Direction.ASC, "fname"));
+        PageRequest pageRequest = PageRequest.of(0,3, Sort.by(Sort.Direction.ASC, FNAME));
         List<Employee> empList = new ArrayList<Employee>();
         Employee employee = new Employee();
         empList.add(employee);
@@ -56,7 +58,7 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void testGetEmployeesWithDeptFilterAndNoRecordsInDB(){
-        PageRequest pageRequest = PageRequest.of(0,3, Sort.by(Sort.Direction.ASC, "fname"));
+        PageRequest pageRequest = PageRequest.of(0,3, Sort.by(Sort.Direction.ASC, FNAME));
         given(employeeRepository.findEmployees(DEPT_NAME_OPS,pageRequest))
                 .willReturn(null);
 
@@ -67,7 +69,7 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void testGetEmployeesWithDeptFilter(){
-        PageRequest pageRequest = PageRequest.of(0,3, Sort.by(Sort.Direction.ASC, "fname"));
+        PageRequest pageRequest = PageRequest.of(0,3, Sort.by(Sort.Direction.ASC, FNAME));
         List<Employee> empList = new ArrayList<Employee>();
         Employee employee = new Employee();
         empList.add(employee);

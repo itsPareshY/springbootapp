@@ -40,9 +40,9 @@ public class EmployeeController {
 
     @GetMapping("/{empId}")
     public ResponseEntity getEmployee(@PathVariable(EMP_ID) long id) throws RecordNotFoundException, InputParamInvalidException {
-        long optId = OptionalLong.of(id).orElse(INVALID_EMP_ID);
+        long optEmpId = OptionalLong.of(id).orElse(INVALID_EMP_ID);
 
-        if (INVALID_EMP_ID != optId && optId > 0) {
+        if (INVALID_EMP_ID != optEmpId && optEmpId > 0) {
             Optional<Employee> result = employeeService.getEmployee(id);
             return  ResponseEntity.ok(result.orElseThrow(() ->  new RecordNotFoundException(INVALID_EMP_ID_ERROR , INVALID_EMPLOYEE_ID + id ))) ;
         } else {
